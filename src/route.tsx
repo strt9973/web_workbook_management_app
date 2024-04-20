@@ -1,5 +1,6 @@
 import { IconCalendar, IconList } from "@tabler/icons-react";
 
+import { Problems } from "./pages/problem/problems";
 import { Today } from "./pages/today/today";
 
 export const routes = [
@@ -13,7 +14,7 @@ export const routes = [
   {
     path: "/problems",
     key: "problem",
-    element: <div>problems</div>,
+    element: <Problems />,
     icon: <IconList />,
     label: "問題一覧",
   },

@@ -18,7 +18,7 @@ export const ProblemCard = (props: {
 
   const { openDrawer } = props;
 
-  const color = difficulty_level == "Easy" ? "LightGreen" : "Yellow";
+  const color = difficulty_level == "Easy" ? "Lightgreen" : "Orange";
 
   return (
     <>
@@ -45,8 +45,8 @@ export const ProblemCard = (props: {
           <Grid.Col span={3}>
             <Badge color={color}>{difficulty_level}</Badge>
           </Grid.Col>
-          <Grid.Col span={3} ta={"end"} onClick={() => openDrawer(id)}>
-            <Button>回答を記録</Button>
+          <Grid.Col span={3} ta={"end"}>
+            <Button onClick={() => openDrawer(id)}>回答を記録</Button>
           </Grid.Col>
         </Grid>
       </Card>

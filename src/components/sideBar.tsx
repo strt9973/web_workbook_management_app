@@ -6,7 +6,7 @@ import { routes } from "../route";
 
 export const Sidebar = () => {
   return (
-    <Box h={"100vh"} w={52}>
+    <Box h={"100vh"} w={52} pt={8}>
       {routes.map((item) => (
         <Tooltip
           label={item.label}

@@ -8,7 +8,7 @@ export default function Layout() {
   return (
     <Flex>
       <Sidebar />
-      <Box w={"100%"}>
+      <Box w={"100%"} m={16}>
         <Outlet />
       </Box>
     </Flex>

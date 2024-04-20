@@ -61,3 +61,12 @@ export const createHistory = `
 INSERT INTO histories (problem_id, answer_url, time, note, is_self_resolved) VALUES
 ($1, $2, $3, $4, $5);
 `;
+
+export const allProblemSelect = `
+SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(h.id) AS ans_count, max(h.created_at) AS last_answered
+FROM problems p
+LEFT JOIN histories h ON h.problem_id = p.id
+WHERE p.category = $1
+GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
+ORDER BY p.id
+`;
