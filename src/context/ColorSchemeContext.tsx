@@ -1,6 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 
-type ColorSchemeType = "light" | "dark"; // 色スキームの型を限定
+export type ColorSchemeType = "light" | "dark"; // 色スキームの型を限定
 
 interface ColorSchemeContextType {
   colorScheme: ColorSchemeType;

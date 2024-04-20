@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 
 import { MantineProvider } from "@mantine/core";
-import { useColorScheme } from "@mantine/hooks";
 import { Notifications } from "@mantine/notifications";
 
-import ColorSchemeContext from "./context/ColorSchemeContext";
+import ColorSchemeContext, {
+  ColorSchemeType,
+} from "./context/ColorSchemeContext";
 import { useSelect } from "./hooks/useDatabase";
 import Router from "./router";
 import { CategorySelect } from "./sql/sql";
@@ -14,8 +15,12 @@ export const CategoryContext = createContext<string[]>([]);
 
 export const App = () => {
   const [category, setCategory] = useState<string[]>([]);
-  const preferredColorScheme = useColorScheme();
-  const [colorScheme, setColorScheme] = useState(preferredColorScheme);
+  const [colorScheme, setColorScheme] = useState<ColorSchemeType>(() =>
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light"
+  );
 
   const getCategories = async () => {
     const categories = await useSelect<Category>(CategorySelect);
