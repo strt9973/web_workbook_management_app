@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 
-import { Box, Tooltip } from "@mantine/core";
+import { Anchor, Box, Stack, Tooltip } from "@mantine/core";
 
 import { routes } from "../route";
+import { ColorToggle } from "./colorToggle";
 
 export const Sidebar = () => {
   return (
-    <Box h={"100vh"} w={52} pt={8}>
+    <Stack h={"100vh"} pt={16} gap={"xs"}>
       {routes.map((item) => (
         <Tooltip
           label={item.label}
@@ -14,11 +15,16 @@ export const Sidebar = () => {
           transitionProps={{ duration: 0 }}
           key={item.key}
         >
-          <Link to={item.path}>
-            <Box m={16}>{item.icon}</Box>
-          </Link>
+          <Anchor component={Link} to={item.path}>
+            <Box mr={16} ml={16} mt={8} mb={8}>
+              {item.icon}
+            </Box>
+          </Anchor>
         </Tooltip>
       ))}
-    </Box>
+      <Box m={16} mt={"auto"}>
+        <ColorToggle />
+      </Box>
+    </Stack>
   );
 };

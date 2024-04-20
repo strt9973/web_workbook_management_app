@@ -54,7 +54,7 @@ export const ProblemTable = ({ category }: ProblemTableType) => {
   return (
     <>
       {problems.length ? (
-        <ScrollArea h={"90vh"}>
+        <ScrollArea h={"calc(100vh - 72px)"}>
           <Table striped withRowBorders={false}>
             <Table.Thead>
               <Table.Tr>

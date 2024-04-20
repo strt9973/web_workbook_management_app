@@ -1,5 +1,6 @@
-import { IconCalendar, IconList } from "@tabler/icons-react";
+import { IconCalendar, IconHistory, IconList } from "@tabler/icons-react";
 
+import { Histories } from "./pages/history/histories";
 import { Problems } from "./pages/problem/problems";
 import { Today } from "./pages/today/today";
 
@@ -17,5 +18,12 @@ export const routes = [
     element: <Problems />,
     icon: <IconList />,
     label: "問題一覧",
+  },
+  {
+    path: "/histories",
+    key: "history",
+    element: <Histories />,
+    icon: <IconHistory />,
+    label: "回答履歴",
   },
 ];
