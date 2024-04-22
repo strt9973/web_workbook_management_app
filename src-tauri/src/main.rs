@@ -20,12 +20,6 @@ fn main() {
             sql: include_str!("../migrations/0002_create_histories.sql"),
             kind: MigrationKind::Up,
         },
-        Migration {
-            version: 3,
-            description: "insert_probrem_seed_data",
-            sql: include_str!("../migrations/0003_insert_seed.sql"),
-            kind: MigrationKind::Up,
-        },
     ];
     
     tauri::Builder::default()

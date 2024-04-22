@@ -2,6 +2,14 @@ export type Category = {
   category: string;
 };
 
+export type CreateProblem = {
+  category: string;
+  problem_name: string;
+  problem_url: string;
+  genre: string;
+  difficulty_level: string;
+};
+
 export type Problem = {
   id: number;
   category: string;

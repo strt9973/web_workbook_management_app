@@ -83,3 +83,8 @@ LEFT JOIN problems p ON p.id = h.problem_id
 WHERE p.category = $1
 ORDER BY h.created_at DESC
 `;
+
+export const createProblem = `
+INSERT INTO problems (category, problem_name, problem_url, genre, difficulty_level) VALUES
+($1, $2, $3, $4, $5);
+`;

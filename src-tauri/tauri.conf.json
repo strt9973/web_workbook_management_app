@@ -12,8 +12,8 @@
     "windows": [
       {
         "title": "leetcode_management_app",
-        "width": 800,
-        "height": 600
+        "width": 1080,
+        "height": 900
       }
     ],
     "security": {
