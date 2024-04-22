@@ -29,3 +29,8 @@ export type History = {
   note: string;
   is_self_resolved: boolean;
 };
+
+export type ViewHistory = History & { created_at: string } & Omit<
+    Problem,
+    "id" | "ans_count" | "last_answered"
+  >;

@@ -1,20 +1,21 @@
 import { Anchor, Badge, Button, Card, Grid } from "@mantine/core";
 
-import { Problem } from "../type";
+import { ViewHistory } from "../type";
 
-export const ProblemCard = (props: {
-  problem: Problem;
-  openDrawer: (problemId: number) => void;
+export const HistoryCard = (props: {
+  history: ViewHistory;
+  openDrawer: (history: ViewHistory) => void;
 }) => {
   const {
-    id,
     problem_name,
     problem_url,
     genre,
     difficulty_level,
-    ans_count,
-    last_answered,
-  } = props.problem;
+    time,
+    note,
+    is_self_resolved,
+    created_at,
+  } = props.history;
 
   const { openDrawer } = props;
 
@@ -25,14 +26,15 @@ export const ProblemCard = (props: {
       <Badge color="blue" radius={"none"}>
         {genre}
       </Badge>
-      {ans_count && ans_count > 0 ? (
-        <Badge color="Teal" radius={"none"}>
-          {ans_count}回解答
-        </Badge>
-      ) : null}
-      {last_answered ? (
-        <Badge color="Indigo" radius={"none"}>
-          最終解答日：{last_answered}
+      <Badge color="Indigo" radius={"none"}>
+        回答日：{created_at}
+      </Badge>
+      <Badge color="Purple" radius={"none"}>
+        時間：{time}分
+      </Badge>
+      {is_self_resolved ? (
+        <Badge color="Green" radius={"none"}>
+          自力解決
         </Badge>
       ) : null}
       <Card mb="xs" padding="xs" withBorder>
@@ -46,9 +48,14 @@ export const ProblemCard = (props: {
             <Badge color={color}>{difficulty_level}</Badge>
           </Grid.Col>
           <Grid.Col span={3} ta={"end"}>
-            <Button size={"xs"} onClick={() => openDrawer(id)}>
-              回答を記録
+            <Button size="xs" onClick={() => openDrawer(props.history)}>
+              回答の更新
             </Button>
+          </Grid.Col>
+        </Grid>
+        <Grid align="center">
+          <Grid.Col span={12} style={{ whiteSpace: "pre-wrap" }}>
+            {note}
           </Grid.Col>
         </Grid>
       </Card>

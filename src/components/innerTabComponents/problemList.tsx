@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { Accordion, Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { HistoryForm } from "../../components/historyForm";
-import { ProblemCard } from "../../components/problemCard";
 import { useExecute, useSelect } from "../../hooks/useDatabase";
 import { createHistory, todayProblemsSelect } from "../../sql/sql";
 import { History, TodayProblem } from "../../type";
+import { HistoryForm } from "../form/historyForm";
+import { ProblemCard } from "../problemCard";
 
 type ProblemListType = {
   category: string;

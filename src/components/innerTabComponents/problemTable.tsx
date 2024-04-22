@@ -10,10 +10,10 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { HistoryForm } from "../../components/historyForm";
 import { useExecute, useSelect } from "../../hooks/useDatabase";
 import { allProblemSelect, createHistory } from "../../sql/sql";
 import { History, Problem } from "../../type";
+import { HistoryForm } from "../form/historyForm";
 
 type ProblemTableType = {
   category: string;

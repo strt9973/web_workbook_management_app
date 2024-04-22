@@ -1,7 +1,7 @@
 import { Button, Checkbox, Group, Textarea, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-import { History } from "../type";
+import { History } from "../../type";
 
 type HistoryFormType = {
   problemId: number;
@@ -22,7 +22,7 @@ export const HistoryForm = (props: HistoryFormType) => {
           time: 0,
           note: "",
           problem_id: problemId,
-          is_self_resolved: false,
+          is_self_resolved: true,
         },
   });
 
@@ -47,8 +47,9 @@ export const HistoryForm = (props: HistoryFormType) => {
       <Textarea label="メモ" required {...form.getInputProps("note")} />
       <Checkbox
         mt="md"
+        required
         label="自力解答できた"
-        {...form.getInputProps("is_self_resolved")}
+        {...form.getInputProps("is_self_resolved", { type: "checkbox" })}
       />
       <Group justify="flex-end" mt="md">
         <Button type="submit">記録</Button>
