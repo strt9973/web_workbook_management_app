@@ -11,7 +11,7 @@ export const ProblemForm = (props: ProblemFormType) => {
   const { save } = props;
 
   const form = useForm<CreateProblem>({
-    mode: "controlled",
+    mode: "uncontrolled",
     validate: {
       category: (value) => (value ? null : "カテゴリ名は必須項目です"),
       problem_name: (value) => (value ? null : "問題の名前は必須項目です"),

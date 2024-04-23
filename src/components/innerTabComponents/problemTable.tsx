@@ -13,6 +13,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useExecute, useSelect } from "../../hooks/useDatabase";
 import { allProblemSelect, createHistory } from "../../sql/sql";
 import { History, Problem } from "../../type";
+import { dateConverter } from "../../utils/utils";
 import { HistoryForm } from "../form/historyForm";
 
 type ProblemTableType = {
@@ -44,7 +45,7 @@ export const ProblemTable = ({ category }: ProblemTableType) => {
       values.problem_id,
       values.answer_url,
       values.time,
-      values.note,
+      values.note ? values.note : "",
       values.is_self_resolved ? 1 : 0,
     ]);
     getProblems();
@@ -90,7 +91,7 @@ export const ProblemTable = ({ category }: ProblemTableType) => {
                       <Badge color={color}>{problem.difficulty_level}</Badge>
                     </Table.Td>
                     <Table.Td>{problem.ans_count}</Table.Td>
-                    <Table.Td>{problem.last_answered}</Table.Td>
+                    <Table.Td>{dateConverter(problem.last_answered)}</Table.Td>
                     <Table.Td>
                       <Button onClick={() => openDrawer(problem.id)} size="xs">
                         回答を記録

@@ -1,6 +1,7 @@
 import { Anchor, Badge, Button, Card, Grid } from "@mantine/core";
 
 import { ViewHistory } from "../type";
+import { dateConverter } from "../utils/utils";
 
 export const HistoryCard = (props: {
   history: ViewHistory;
@@ -27,7 +28,7 @@ export const HistoryCard = (props: {
         {genre}
       </Badge>
       <Badge color="Indigo" radius={"none"}>
-        回答日：{created_at}
+        回答日：{dateConverter(created_at)}
       </Badge>
       <Badge color="Purple" radius={"none"}>
         時間：{time}分

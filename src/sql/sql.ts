@@ -18,7 +18,7 @@ SELECT * FROM
 FROM problems p
 LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
-AND h.created_at BETWEEN date('now', '-3 day') AND date('now', '-1 day')
+AND date(h.created_at) BETWEEN date('now', '-7 day') AND date('now', '-1 day')
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
 HAVING count(*) < 3
@@ -29,7 +29,7 @@ SELECT * FROM
 FROM problems p
 LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
-AND h.created_at BETWEEN date('now', '-7 day') AND date('now', '-4 day')
+AND date(h.created_at) BETWEEN date('now', '-14 day') AND date('now', '-8 day')
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
 HAVING count(*) < 3
@@ -40,7 +40,7 @@ SELECT * FROM
 FROM problems p
 LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
-AND h.created_at <= date('now', '-8 day')
+AND date(h.created_at) <= date('now', '-14 day')
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
 HAVING count(*) < 3

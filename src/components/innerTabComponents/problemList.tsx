@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Accordion, Drawer } from "@mantine/core";
+import { Accordion, Drawer, ScrollArea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
 import { useExecute, useSelect } from "../../hooks/useDatabase";
@@ -54,7 +54,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
       values.problem_id,
       values.answer_url,
       values.time,
-      values.note,
+      values.note ? values.note : "",
       values.is_self_resolved ? 1 : 0,
     ]);
     getProblemList();
@@ -62,7 +62,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
   };
 
   return (
-    <>
+    <ScrollArea h={"calc(100vh - 72px)"} p={16}>
       <Accordion defaultValue="today" mt="md">
         <Accordion.Item key="today" value="today">
           <Accordion.Control icon="">次に解く問題</Accordion.Control>
@@ -85,7 +85,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
           </Accordion.Panel>
         </Accordion.Item>
         <Accordion.Item key="review1" value="review1">
-          <Accordion.Control>解いてから1日経過した問題</Accordion.Control>
+          <Accordion.Control>回答後1日以上経過した問題</Accordion.Control>
           <Accordion.Panel>
             {review1Problems.length ? (
               <>
@@ -105,7 +105,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
           </Accordion.Panel>
         </Accordion.Item>
         <Accordion.Item key="review2" value="review2">
-          <Accordion.Control>解いてから3日経過した問題</Accordion.Control>
+          <Accordion.Control>回答後7日以上経過した問題</Accordion.Control>
           <Accordion.Panel>
             {review2Problems.length ? (
               <>
@@ -125,7 +125,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
           </Accordion.Panel>
         </Accordion.Item>
         <Accordion.Item key="review3" value="review3">
-          <Accordion.Control>解いてから7日経過した問題</Accordion.Control>
+          <Accordion.Control>回答後14日以上経過した問題</Accordion.Control>
           <Accordion.Panel>
             {review3Problems.length ? (
               <>
@@ -149,10 +149,10 @@ export const ProblemList = ({ category }: ProblemListType) => {
         position="right"
         opened={opened}
         onClose={close}
-        title="解答を登録"
+        title="回答を登録"
       >
         {problemId ? <HistoryForm problemId={problemId} save={save} /> : null}
       </Drawer>
-    </>
+    </ScrollArea>
   );
 };

@@ -47,7 +47,7 @@ export const HistoryList = ({ category }: ProblemListType) => {
       values.problem_id,
       values.answer_url,
       values.time,
-      values.note,
+      values.note ? values.note : "",
       values.is_self_resolved ? 1 : 0,
       values.id,
     ]);
@@ -60,8 +60,8 @@ export const HistoryList = ({ category }: ProblemListType) => {
       <ScrollArea h={"calc(100vh - 72px)"} p={16}>
         {histories.map((h) => {
           return (
-            <Box pb={8}>
-              <HistoryCard history={h} openDrawer={openDrawer} key={h.id} />
+            <Box pb={8} key={h.id}>
+              <HistoryCard history={h} openDrawer={openDrawer} />
             </Box>
           );
         })}

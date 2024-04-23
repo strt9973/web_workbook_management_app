@@ -13,7 +13,7 @@ export const HistoryForm = (props: HistoryFormType) => {
   const { problemId, initialValues, save } = props;
 
   const form = useForm<History>({
-    mode: "controlled",
+    mode: "uncontrolled",
     initialValues: initialValues
       ? initialValues
       : {
@@ -22,13 +22,12 @@ export const HistoryForm = (props: HistoryFormType) => {
           time: 0,
           note: "",
           problem_id: problemId,
-          is_self_resolved: true,
+          is_self_resolved: false,
         },
     validate: {
       problem_id: (value) => (value ? null : ""),
       answer_url: (value) => (value ? null : "回答のURLは必須項目です"),
       time: (value) => (value ? null : "回答時間(分)は必須項目です"),
-      note: (value) => (value ? null : "メモは必須項目です"),
     },
   });
 
@@ -50,10 +49,9 @@ export const HistoryForm = (props: HistoryFormType) => {
         required
         {...form.getInputProps("time")}
       />
-      <Textarea label="メモ" required {...form.getInputProps("note")} />
+      <Textarea label="メモ" {...form.getInputProps("note")} />
       <Checkbox
         mt="md"
-        required
         label="自力回答できた"
         {...form.getInputProps("is_self_resolved", { type: "checkbox" })}
       />
