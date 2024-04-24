@@ -7,7 +7,7 @@ import { ColorToggle } from "./colorToggle";
 
 export const Sidebar = () => {
   return (
-    <Stack h={"100vh"} pt={16} gap={"xs"}>
+    <Stack h={"calc(100vh - 48px)"} pt={16} gap={"xs"}>
       {routes.map((item) => (
         <Tooltip
           label={item.label}

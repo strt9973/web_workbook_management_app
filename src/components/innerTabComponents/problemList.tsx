@@ -62,7 +62,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
   };
 
   return (
-    <ScrollArea h={"calc(100vh - 72px)"} p={16}>
+    <ScrollArea h={"calc(100vh - 120px)"} p={16}>
       <Accordion defaultValue="today" mt="md">
         <Accordion.Item key="today" value="today">
           <Accordion.Control icon="">次に解く問題</Accordion.Control>

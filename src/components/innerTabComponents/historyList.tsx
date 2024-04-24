@@ -57,7 +57,7 @@ export const HistoryList = ({ category }: ProblemListType) => {
 
   return (
     <>
-      <ScrollArea h={"calc(100vh - 72px)"} p={16}>
+      <ScrollArea h={"calc(100vh - 120px)"} p={16}>
         {histories.map((h) => {
           return (
             <Box pb={8} key={h.id}>
