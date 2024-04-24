@@ -49,7 +49,12 @@ export const HistoryForm = (props: HistoryFormType) => {
         required
         {...form.getInputProps("time")}
       />
-      <Textarea label="メモ" {...form.getInputProps("note")} />
+      <Textarea
+        label="メモ"
+        {...form.getInputProps("note")}
+        autosize={true}
+        minRows={6}
+      />
       <Checkbox
         mt="md"
         label="自力回答できた"
