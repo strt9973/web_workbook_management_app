@@ -24,7 +24,7 @@ fn main() {
         .plugin(tauri_plugin_store::Builder::new().build())
         .plugin(
             tauri_plugin_sql::Builder::default()
-                .add_migrations("sqlite:leetcode-management-db.db", migrations)
+                .add_migrations("sqlite:web-workbook-management-app.db", migrations)
                 .build(),
         ).plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_shell::init())

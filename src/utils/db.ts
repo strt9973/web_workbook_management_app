@@ -8,7 +8,7 @@ export async function select<T>(
   let db: Database | null = null;
   let result: any | null = null;
   try {
-    db = await Database.load("sqlite:leetcode-management-db.db");
+    db = await Database.load("sqlite:web-workbook-management-app.db");
     if (bindValues) {
       result = await db.select(sql, bindValues);
     } else {
@@ -35,7 +35,7 @@ export const execute = async (
   let db: Database | null = null;
   let result: QueryResult | null = null;
   try {
-    db = await Database.load("sqlite:leetcode-management-db.db");
+    db = await Database.load("sqlite:web-workbook-management-app.db");
     if (bindValues) {
       result = await db.execute(sql, bindValues);
     } else {

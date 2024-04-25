@@ -1,6 +1,6 @@
 [package]
-name = "leetcode_management_app"
-version = "0.0.0"
+name = "web-workbook-management-app"
+version = "1.0.0"
 description = "A Tauri App"
 authors = ["you"]
 edition = "2021"
