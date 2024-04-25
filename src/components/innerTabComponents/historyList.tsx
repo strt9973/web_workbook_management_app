@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { Box, Drawer, ScrollArea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { useExecute, useSelect } from "../../hooks/useDatabase";
 import { historiesSelect, updateHistory } from "../../sql/sql";
 import { History, ViewHistory } from "../../type";
+import { execute, select } from "../../utils/db";
 import { HistoryForm } from "../form/historyForm";
 import { HistoryCard } from "../historyCard";
 
@@ -20,7 +20,7 @@ export const HistoryList = ({ category }: ProblemListType) => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const getHistoryList = async () => {
-    const histories = await useSelect<ViewHistory>(historiesSelect, [category]);
+    const histories = await select<ViewHistory>(historiesSelect, [category]);
 
     if (!histories) return;
     setHistories(histories);
@@ -43,7 +43,7 @@ export const HistoryList = ({ category }: ProblemListType) => {
   };
 
   const save = async (values: History) => {
-    await useExecute(updateHistory, [
+    await execute(updateHistory, [
       values.problem_id,
       values.answer_url,
       values.time,

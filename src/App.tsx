@@ -6,10 +6,10 @@ import { Notifications } from "@mantine/notifications";
 import ColorSchemeContext, {
   ColorSchemeType,
 } from "./context/ColorSchemeContext";
-import { useSelect } from "./hooks/useDatabase";
 import Router from "./router";
 import { CategorySelect } from "./sql/sql";
 import { Category } from "./type";
+import { select } from "./utils/db";
 
 export const CategoryContext = createContext<string[]>([]);
 
@@ -23,7 +23,7 @@ export const App = () => {
   );
 
   const getCategories = async () => {
-    const categories = await useSelect<Category>(CategorySelect);
+    const categories = await select<Category>(CategorySelect);
     if (!categories) return;
     const categoryList = categories.map((c) => c.category);
     setCategory(categoryList);

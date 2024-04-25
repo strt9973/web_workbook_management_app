@@ -1,7 +1,7 @@
 import { notifications } from "@mantine/notifications";
 import Database, { QueryResult } from "@tauri-apps/plugin-sql";
 
-export async function useSelect<T>(
+export async function select<T>(
   sql: string,
   bindValues?: (string | number)[]
 ): Promise<T[]> {
@@ -28,7 +28,7 @@ export async function useSelect<T>(
   }
 }
 
-export const useExecute = async (
+export const execute = async (
   sql: string,
   bindValues?: (string | number)[]
 ) => {

@@ -10,9 +10,9 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { useExecute, useSelect } from "../../hooks/useDatabase";
 import { allProblemSelect, createHistory } from "../../sql/sql";
 import { History, Problem } from "../../type";
+import { execute, select } from "../../utils/db";
 import { dateConverter } from "../../utils/utils";
 import { HistoryForm } from "../form/historyForm";
 
@@ -26,7 +26,7 @@ export const ProblemTable = ({ category }: ProblemTableType) => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const getProblems = async () => {
-    const problems = await useSelect<Problem>(allProblemSelect, [category]);
+    const problems = await select<Problem>(allProblemSelect, [category]);
     if (!problems) return;
     setProblems(problems);
   };
@@ -41,7 +41,7 @@ export const ProblemTable = ({ category }: ProblemTableType) => {
   };
 
   const save = async (values: History) => {
-    await useExecute(createHistory, [
+    await execute(createHistory, [
       values.problem_id,
       values.answer_url,
       values.time,

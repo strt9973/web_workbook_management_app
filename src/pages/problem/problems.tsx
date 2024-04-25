@@ -5,15 +5,15 @@ import { IconPlus } from "@tabler/icons-react";
 import { ProblemForm } from "../../components/form/problemForm";
 import { ProblemTable } from "../../components/innerTabComponents/problemTable";
 import { TabFrame } from "../../components/tabFrame";
-import { useExecute } from "../../hooks/useDatabase";
 import { createProblem } from "../../sql/sql";
 import { CreateProblem } from "../../type";
+import { execute } from "../../utils/db";
 
 export const Problems = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const save = async (values: CreateProblem) => {
-    await useExecute(createProblem, [
+    await execute(createProblem, [
       values.category,
       values.problem_name,
       values.problem_url,

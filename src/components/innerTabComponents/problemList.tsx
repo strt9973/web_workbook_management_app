@@ -4,9 +4,9 @@ import { Accordion, Drawer, ScrollArea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Store } from "@tauri-apps/plugin-store";
 
-import { useExecute, useSelect } from "../../hooks/useDatabase";
 import { createHistory, todayProblemsSelect } from "../../sql/sql";
 import { History, Setting, TodayProblem } from "../../type";
+import { execute, select } from "../../utils/db";
 import { HistoryForm } from "../form/historyForm";
 import { ProblemCard } from "../problemCard";
 
@@ -37,7 +37,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
         review_3_threshold: 14,
       });
     }
-    const problemList = await useSelect<TodayProblem>(todayProblemsSelect, [
+    const problemList = await select<TodayProblem>(todayProblemsSelect, [
       category,
       2,
       3,
@@ -87,7 +87,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
   };
 
   const save = async (values: History) => {
-    await useExecute(createHistory, [
+    await execute(createHistory, [
       values.problem_id,
       values.answer_url,
       values.time,

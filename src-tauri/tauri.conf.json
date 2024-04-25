@@ -1,7 +1,7 @@
 {
-  "productName": "leetcode_management_app",
-  "version": "0.0.0",
-  "identifier": "com.leetcode-management-app.dev",
+  "productName": "Web Workbook Management App",
+  "version": "1.0.0",
+  "identifier": "com.web-workbook-management-app.dev",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -11,7 +11,7 @@
   "app": {
     "windows": [
       {
-        "title": "leetcode_management_app",
+        "title": "Web Workbook Management App",
         "width": 1080,
         "height": 900
       }
