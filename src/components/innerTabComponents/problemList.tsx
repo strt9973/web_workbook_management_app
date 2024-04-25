@@ -18,6 +18,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
   const [review1Problems, setReview1Problems] = useState<TodayProblem[]>([]);
   const [review2Problems, setReview2Problems] = useState<TodayProblem[]>([]);
   const [review3Problems, setReview3Problems] = useState<TodayProblem[]>([]);
+  const [weakProblems, setWeakProblems] = useState<TodayProblem[]>([]);
   const [problemId, setProblemId] = useState<number>();
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -38,6 +39,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
     setReview3Problems(
       problemList.filter((p) => p.problem_type === "review_3")
     );
+    setWeakProblems(problemList.filter((p) => p.problem_type === "weak"));
   };
 
   useEffect(() => {
@@ -130,6 +132,26 @@ export const ProblemList = ({ category }: ProblemListType) => {
             {review3Problems.length ? (
               <>
                 {review3Problems.map((p) => {
+                  return (
+                    <ProblemCard
+                      problem={p}
+                      openDrawer={openDrawer}
+                      key={p.id}
+                    />
+                  );
+                })}
+              </>
+            ) : (
+              <p>ありません</p>
+            )}
+          </Accordion.Panel>
+        </Accordion.Item>
+        <Accordion.Item key="weak" value="weak">
+          <Accordion.Control>苦手な問題</Accordion.Control>
+          <Accordion.Panel>
+            {weakProblems.length ? (
+              <>
+                {weakProblems.map((p) => {
                   return (
                     <ProblemCard
                       problem={p}

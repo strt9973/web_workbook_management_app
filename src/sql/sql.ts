@@ -6,7 +6,7 @@ GROUP BY category
 
 export const todayProblemsSelect = `
 SELECT * FROM 
-(SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, 0 AS ans_count, null AS last_answered, 'new' AS problem_type
+(SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, 0 AS ans_count, 0 AS self_resolved_count, null AS last_answered, 'new' AS problem_type
 FROM problems p
 LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NULL
@@ -14,7 +14,7 @@ AND p.category = $1
 limit $2)
 UNION ALL
 SELECT * FROM
-(SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, max(h.created_at) AS last_answered, 'review_1' AS problem_type
+(SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, sum(CASE WHEN h.is_self_resolved = 1 THEN 1 ELSE 0 END) as self_resolved_count, max(h.created_at) AS last_answered, 'review_1' AS problem_type
 FROM problems p
 LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
@@ -25,7 +25,7 @@ AND date(max(h.created_at)) BETWEEN date('now', '-7 day') AND date('now', '-1 da
 ORDER BY last_answered)
 UNION ALL
 SELECT * FROM
-(SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, max(h.created_at) AS last_answered, 'review_2' AS problem_type
+(SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, sum(CASE WHEN h.is_self_resolved = 1 THEN 1 ELSE 0 END) as self_resolved_count, max(h.created_at) AS last_answered, 'review_2' AS problem_type
 FROM problems p
 LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
@@ -36,7 +36,7 @@ AND date(max(h.created_at)) BETWEEN date('now', '-14 day') AND date('now', '-8 d
 ORDER BY last_answered)
 UNION ALL
 SELECT * FROM
-(SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, max(h.created_at) AS last_answered, 'review_3' AS problem_type
+(SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, sum(CASE WHEN h.is_self_resolved = 1 THEN 1 ELSE 0 END) as self_resolved_count, max(h.created_at) AS last_answered, 'review_3' AS problem_type
 FROM problems p
 LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
@@ -44,6 +44,17 @@ AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
 HAVING count(*) < 3
 AND date(max(h.created_at)) <= date('now', '-15 day')
+ORDER BY last_answered)
+UNION ALL
+SELECT * FROM
+(SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, sum(CASE WHEN h.is_self_resolved = 1 THEN 1 ELSE 0 END) as self_resolved_count, max(h.created_at) AS last_answered, 'weak' AS problem_type
+FROM problems p
+LEFT JOIN histories h ON h.problem_id = p.id
+WHERE h.id IS NOT NULL
+AND p.category = $1
+GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
+HAVING ans_count < 3
+AND self_resolved_count < ans_count
 ORDER BY last_answered);
 `;
 

@@ -14,6 +14,7 @@ export const ProblemCard = (props: {
     genre,
     difficulty_level,
     ans_count,
+    self_resolved_count,
     last_answered,
   } = props.problem;
 
@@ -28,7 +29,12 @@ export const ProblemCard = (props: {
       </Badge>
       {ans_count && ans_count > 0 ? (
         <Badge color="Teal" radius={"none"}>
-          回答数：{ans_count}回
+          総回答数：{ans_count}回
+        </Badge>
+      ) : null}
+      {self_resolved_count && self_resolved_count > 0 ? (
+        <Badge color="Teal" radius={"none"}>
+          自力回答数：{self_resolved_count}回
         </Badge>
       ) : null}
       {last_answered ? (

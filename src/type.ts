@@ -18,11 +18,12 @@ export type Problem = {
   genre: string;
   difficulty_level: string;
   ans_count: number;
+  self_resolved_count: number;
   last_answered: string;
 };
 
 export type TodayProblem = Problem & {
-  problem_type: "new" | "review_1" | "review_2" | "review_3";
+  problem_type: "new" | "review_1" | "review_2" | "review_3" | "weak";
 };
 
 export type todaySolvedProblemCount = {
