@@ -20,8 +20,8 @@ LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
-HAVING count(*) < 3
-AND date(max(h.created_at)) BETWEEN date('now', '-7 day') AND date('now', '-1 day')
+HAVING count(*) < $3
+AND date(max(h.created_at)) BETWEEN date('now', $5) AND date('now', $4)
 ORDER BY last_answered)
 UNION ALL
 SELECT * FROM
@@ -31,8 +31,8 @@ LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
-HAVING count(*) < 3
-AND date(max(h.created_at)) BETWEEN date('now', '-14 day') AND date('now', '-8 day')
+HAVING count(*) < $3
+AND date(max(h.created_at)) BETWEEN date('now', $7) AND date('now', $6)
 ORDER BY last_answered)
 UNION ALL
 SELECT * FROM
@@ -42,8 +42,8 @@ LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
-HAVING count(*) < 3
-AND date(max(h.created_at)) <= date('now', '-15 day')
+HAVING count(*) < $3
+AND date(max(h.created_at)) <= date('now', $8)
 ORDER BY last_answered)
 UNION ALL
 SELECT * FROM
@@ -53,7 +53,7 @@ LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
-HAVING ans_count < 3
+HAVING ans_count < $3
 AND self_resolved_count < ans_count
 ORDER BY last_answered);
 `;

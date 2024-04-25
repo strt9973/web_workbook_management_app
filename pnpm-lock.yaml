@@ -35,6 +35,9 @@ dependencies:
   '@tauri-apps/plugin-sql':
     specifier: 2.0.0-beta.2
     version: 2.0.0-beta.2
+  '@tauri-apps/plugin-store':
+    specifier: 2.0.0-beta.2
+    version: 2.0.0-beta.2
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -973,6 +976,12 @@ packages:
 
   /@tauri-apps/plugin-sql@2.0.0-beta.2:
     resolution: {integrity: sha512-gNX/4VjGl0TD4Ct58ar4bLF82iRp2L5sS79FmtzKlXYj7tVbkxenIi+mGIBz3Ut1JQP5WNL4/5wq74bkDlBggA==}
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.4
+    dev: false
+
+  /@tauri-apps/plugin-store@2.0.0-beta.2:
+    resolution: {integrity: sha512-9TdMLLYEPqRSABRX3GtwFNWiulfW+SUHdi+5dVgdk73B8PtGf457gdtwvgrP/O2k9Vt/ET2X6Nurimx1185AzA==}
     dependencies:
       '@tauri-apps/api': 2.0.0-beta.4
     dev: false
