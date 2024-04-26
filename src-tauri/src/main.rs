@@ -27,6 +27,8 @@ fn main() {
                 .add_migrations("sqlite:web-workbook-management-app.db", migrations)
                 .build(),
         ).plugin(tauri_plugin_store::Builder::default().build())
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
