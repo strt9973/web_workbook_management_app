@@ -16,7 +16,6 @@ export const SettingForm = (props: { initialValues: Setting }) => {
   const save = async (values: Setting) => {
     await store.set("setting", values);
     await store.save();
-    console.log("done");
   };
   return (
     <form onSubmit={form.onSubmit((values) => save(values))}>

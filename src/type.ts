@@ -30,6 +30,10 @@ export type todaySolvedProblemCount = {
   ans_count: number;
 };
 
+export type ImportProblemType = Omit<
+  Problem,
+  "id" | "ans_count" | "self_resolved_count" | "last_answered"
+>;
 export type History = {
   id: number;
   problem_id: number;

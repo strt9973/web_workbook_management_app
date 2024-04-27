@@ -60,7 +60,6 @@ export const ProblemList = ({ category }: ProblemListType) => {
       } day`,
     ]);
 
-    console.log(problemList);
     if (!problemList) return;
     setNewProblems(problemList.filter((p) => p.problem_type === "new"));
     setReview1Problems(
