@@ -20,9 +20,9 @@ LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
-HAVING count(*) < $3
-AND date(max(h.created_at)) BETWEEN date('now', $5) AND date('now', $4)
-ORDER BY last_answered)
+HAVING self_resolved_count < 2
+AND date(max(h.created_at)) BETWEEN date('now', $4) AND date('now', $3)
+ORDER BY self_resolved_count, last_answered)
 UNION ALL
 SELECT * FROM
 (SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, sum(CASE WHEN h.is_self_resolved = 1 THEN 1 ELSE 0 END) as self_resolved_count, max(h.created_at) AS last_answered, 'review_2' AS problem_type
@@ -31,9 +31,9 @@ LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
-HAVING count(*) < $3
-AND date(max(h.created_at)) BETWEEN date('now', $7) AND date('now', $6)
-ORDER BY last_answered)
+HAVING self_resolved_count < 3
+AND date(max(h.created_at)) BETWEEN date('now', $6) AND date('now', $5)
+ORDER BY self_resolved_count, last_answered)
 UNION ALL
 SELECT * FROM
 (SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, sum(CASE WHEN h.is_self_resolved = 1 THEN 1 ELSE 0 END) as self_resolved_count, max(h.created_at) AS last_answered, 'review_3' AS problem_type
@@ -42,9 +42,9 @@ LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
-HAVING count(*) < $3
-AND date(max(h.created_at)) <= date('now', $8)
-ORDER BY last_answered)
+HAVING self_resolved_count < 4
+AND date(max(h.created_at)) <= date('now', $7)
+ORDER BY self_resolved_count, last_answered)
 UNION ALL
 SELECT * FROM
 (SELECT p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level, count(*) AS ans_count, sum(CASE WHEN h.is_self_resolved = 1 THEN 1 ELSE 0 END) as self_resolved_count, max(h.created_at) AS last_answered, 'weak' AS problem_type
@@ -53,7 +53,7 @@ LEFT JOIN histories h ON h.problem_id = p.id
 WHERE h.id IS NOT NULL
 AND p.category = $1
 GROUP BY p.id, p.category, p.problem_name, p.problem_url, p.genre, p.difficulty_level
-HAVING ans_count < $3
+HAVING self_resolved_count < 4
 AND self_resolved_count < ans_count
 ORDER BY last_answered);
 `;

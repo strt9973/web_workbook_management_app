@@ -16,7 +16,6 @@ export const Settings = () => {
       setSetting(setting);
     } else {
       setSetting({
-        answer_threshold: 3,
         review_1_threshold: 1,
         review_2_threshold: 7,
         review_3_threshold: 14,

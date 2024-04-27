@@ -45,7 +45,6 @@ export type ViewHistory = History & { created_at: string } & Omit<
   >;
 
 export type Setting = {
-  answer_threshold: number;
   review_1_threshold: number;
   review_2_threshold: number;
   review_3_threshold: number;

@@ -21,11 +21,6 @@ export const SettingForm = (props: { initialValues: Setting }) => {
   return (
     <form onSubmit={form.onSubmit((values) => save(values))}>
       <NumberInput
-        label="回答回数の基準"
-        required
-        {...form.getInputProps("answer_threshold")}
-      />
-      <NumberInput
         label="1回目の復習日"
         required
         {...form.getInputProps("review_1_threshold")}
