@@ -31,7 +31,6 @@ export const ProblemList = ({ category }: ProblemListType) => {
       setSetting(setting);
     } else {
       setSetting({
-        answer_threshold: 3,
         review_1_threshold: 1,
         review_2_threshold: 7,
         review_3_threshold: 14,
@@ -40,7 +39,6 @@ export const ProblemList = ({ category }: ProblemListType) => {
     const problemList = await select<TodayProblem>(todayProblemsSelect, [
       category,
       2,
-      3,
       `-${
         setting && setting.review_1_threshold ? setting.review_1_threshold : 1
       } day`,
@@ -123,8 +121,8 @@ export const ProblemList = ({ category }: ProblemListType) => {
         </Accordion.Item>
         <Accordion.Item key="review1" value="review1">
           <Accordion.Control>
-            回答後{setting?.review_1_threshold ? setting.review_1_threshold : 1}
-            日以上経過した問題
+            {setting?.review_1_threshold ? setting.review_1_threshold : 1}
+            日以上経過した復習対象の問題
           </Accordion.Control>
           <Accordion.Panel>
             {review1Problems.length ? (
@@ -146,8 +144,8 @@ export const ProblemList = ({ category }: ProblemListType) => {
         </Accordion.Item>
         <Accordion.Item key="review2" value="review2">
           <Accordion.Control>
-            回答後{setting?.review_2_threshold ? setting.review_2_threshold : 7}
-            日以上経過した問題
+            {setting?.review_2_threshold ? setting.review_2_threshold : 7}
+            日以上経過した復習対象の問題
           </Accordion.Control>
           <Accordion.Panel>
             {review2Problems.length ? (
@@ -169,9 +167,8 @@ export const ProblemList = ({ category }: ProblemListType) => {
         </Accordion.Item>
         <Accordion.Item key="review3" value="review3">
           <Accordion.Control>
-            回答後
             {setting?.review_3_threshold ? setting.review_3_threshold : 14}
-            日以上経過した問題
+            日以上経過した復習対象の問題
           </Accordion.Control>
           <Accordion.Panel>
             {review3Problems.length ? (
