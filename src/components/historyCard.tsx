@@ -1,7 +1,7 @@
 import { Anchor, Badge, Button, Card, Grid } from "@mantine/core";
 
 import { ViewHistory } from "../type";
-import { dateConverter } from "../utils/utils";
+import { calcBadgeColor, dateConverter } from "../utils/utils";
 
 export const HistoryCard = (props: {
   history: ViewHistory;
@@ -19,8 +19,6 @@ export const HistoryCard = (props: {
   } = props.history;
 
   const { openDrawer } = props;
-
-  const color = difficulty_level == "Easy" ? "Lightgreen" : "Orange";
 
   return (
     <>
@@ -46,7 +44,9 @@ export const HistoryCard = (props: {
             </Anchor>
           </Grid.Col>
           <Grid.Col span={3}>
-            <Badge color={color}>{difficulty_level}</Badge>
+            <Badge color={calcBadgeColor(difficulty_level)}>
+              {difficulty_level}
+            </Badge>
           </Grid.Col>
           <Grid.Col span={3} ta={"end"}>
             <Button size="xs" onClick={() => openDrawer(props.history)}>
