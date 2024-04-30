@@ -6,3 +6,21 @@ export const dateConverter = (date: string) => {
   const day = dateObj.getDate();
   return `${year}/${month}/${day}`;
 };
+
+export const calcBadgeColor = (str: string) => {
+  let color = "Blue";
+  switch (str) {
+    case "Easy":
+      color = "Lightgreen";
+      break;
+    case "Medium":
+      color = "Orange";
+      break;
+    case "Hard":
+      color = "Red";
+      break;
+    default:
+      color = "Blue";
+  }
+  return color;
+};

@@ -13,7 +13,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { allProblemSelect, createHistory } from "../../sql/sql";
 import { History, Problem } from "../../type";
 import { execute, select } from "../../utils/db";
-import { dateConverter } from "../../utils/utils";
+import { calcBadgeColor, dateConverter } from "../../utils/utils";
 import { HistoryForm } from "../form/historyForm";
 
 type ProblemTableType = {
@@ -70,8 +70,6 @@ export const ProblemTable = ({ category }: ProblemTableType) => {
             </Table.Thead>
             <Table.Tbody>
               {problems.map((problem) => {
-                const color =
-                  problem.difficulty_level == "Easy" ? "Lightgreen" : "Orange";
                 return (
                   <Table.Tr key={problem.id}>
                     <Table.Td>{problem.id}</Table.Td>
@@ -88,7 +86,9 @@ export const ProblemTable = ({ category }: ProblemTableType) => {
                       <Badge>{problem.genre}</Badge>
                     </Table.Td>
                     <Table.Td>
-                      <Badge color={color}>{problem.difficulty_level}</Badge>
+                      <Badge color={calcBadgeColor(problem.difficulty_level)}>
+                        {problem.difficulty_level}
+                      </Badge>
                     </Table.Td>
                     <Table.Td>{problem.ans_count}</Table.Td>
                     <Table.Td>{dateConverter(problem.last_answered)}</Table.Td>
