@@ -38,8 +38,8 @@ export const App = () => {
     >
       <CategoryContext.Provider value={category}>
         <MantineProvider forceColorScheme={colorScheme}>
-          <Router />
           <Notifications />
+          <Router />
         </MantineProvider>
       </CategoryContext.Provider>
     </ColorSchemeContext.Provider>
