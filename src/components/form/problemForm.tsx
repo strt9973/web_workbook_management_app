@@ -15,9 +15,25 @@ export const ProblemForm = (props: ProblemFormType) => {
     validate: {
       category: (value) => (value ? null : "カテゴリ名は必須項目です"),
       problem_name: (value) => (value ? null : "問題の名前は必須項目です"),
-      problem_url: (value) => (value ? null : "問題のURLは必須項目です"),
+      problem_url: (value) => {
+        if (value === null) {
+          return "問題のURLは必須項目です";
+        }
+        if (!(value.startsWith("https://") || value.startsWith("http://"))) {
+          return "https:// か http:// で始まっている必要があります。";
+        }
+        return null;
+      },
       genre: (value) => (value ? null : "ジャンルは必須項目です"),
-      difficulty_level: (value) => (value ? null : "難易度は必須項目です"),
+      difficulty_level: (value) => {
+        if (value === null) {
+          return "難易度は必須項目です";
+        }
+        if (!["Easy", "Medium", "Hard"].includes(value)) {
+          return "Easy か Medium か Hard のいずれかである必要があります。";
+        }
+        return null;
+      },
     },
   });
 

@@ -3,6 +3,7 @@
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 use tauri_plugin_sql::{Migration, MigrationKind};
+mod import;
 
 fn main() {
     let migrations = vec![
@@ -27,7 +28,12 @@ fn main() {
                 .add_migrations("sqlite:web-workbook-management-app.db", migrations)
                 .build(),
         ).plugin(tauri_plugin_store::Builder::default().build())
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
+        .invoke_handler(tauri::generate_handler![
+            import::import_problems,
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

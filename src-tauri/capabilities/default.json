@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Capability for the main window",
+  "description": "Capabilityforthemainwindow",
   "windows": ["main"],
   "permissions": [
     "path:default",
@@ -20,6 +20,11 @@
     "store:allow-get",
     "store:allow-set",
     "store:allow-save",
-    "store:allow-load"
+    "store:allow-load",
+    "dialog:allow-open",
+    {
+      "identifier": "fs:allow-app-read",
+      "allow": [{ "path": "$HOME/**" }]
+    }
   ]
 }
