@@ -1,3 +1,5 @@
+import "@mantine/notifications/styles.css";
+
 import { createContext, useEffect, useState } from "react";
 
 import { MantineProvider } from "@mantine/core";
