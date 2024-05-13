@@ -1,6 +1,6 @@
 {
   "productName": "Web Workbook Management App",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "identifier": "com.web-workbook-management-app.dev",
   "build": {
     "beforeDevCommand": "pnpm dev",
