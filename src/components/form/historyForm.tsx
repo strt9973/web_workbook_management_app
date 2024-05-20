@@ -26,8 +26,8 @@ export const HistoryForm = (props: HistoryFormType) => {
         },
     validate: {
       problem_id: (value) => (value ? null : ""),
-      answer_url: (value) => (value ? null : "回答のURLは必須項目です"),
-      time: (value) => (value ? null : "回答時間(分)は必須項目です"),
+      answer_url: (value) => (value ? null : "解答のURLは必須項目です"),
+      time: (value) => (value ? null : "解答時間(分)は必須項目です"),
     },
   });
 
@@ -40,12 +40,12 @@ export const HistoryForm = (props: HistoryFormType) => {
         {...form.getInputProps("problem_id")}
       />
       <TextInput
-        label="回答のURL"
+        label="解答のURL"
         required
         {...form.getInputProps("answer_url")}
       />
       <TextInput
-        label="回答時間(分)"
+        label="解答時間(分)"
         required
         {...form.getInputProps("time")}
       />
@@ -57,7 +57,7 @@ export const HistoryForm = (props: HistoryFormType) => {
       />
       <Checkbox
         mt="md"
-        label="自力回答できた"
+        label="自力解答できた"
         {...form.getInputProps("is_self_resolved", { type: "checkbox" })}
       />
       <Group justify="flex-end" mt="md">

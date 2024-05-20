@@ -212,7 +212,7 @@ export const ProblemList = ({ category }: ProblemListType) => {
         position="right"
         opened={opened}
         onClose={close}
-        title="回答を登録"
+        title="解答を登録"
       >
         {problemId ? <HistoryForm problemId={problemId} save={save} /> : null}
       </Drawer>

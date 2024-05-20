@@ -26,7 +26,7 @@ export const HistoryCard = (props: {
         {genre}
       </Badge>
       <Badge color="Indigo" radius={"none"}>
-        回答日：{dateConverter(created_at)}
+        解答日：{dateConverter(created_at)}
       </Badge>
       <Badge color="Purple" radius={"none"}>
         時間：{time}分
@@ -50,7 +50,7 @@ export const HistoryCard = (props: {
           </Grid.Col>
           <Grid.Col span={3} ta={"end"}>
             <Button size="xs" onClick={() => openDrawer(props.history)}>
-              回答の更新
+              解答の更新
             </Button>
           </Grid.Col>
         </Grid>

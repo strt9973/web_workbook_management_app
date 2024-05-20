@@ -30,7 +30,7 @@ export const routes = [
     key: "history",
     element: <Histories />,
     icon: <IconHistory />,
-    label: "回答履歴",
+    label: "解答履歴",
   },
   {
     path: "/settings",

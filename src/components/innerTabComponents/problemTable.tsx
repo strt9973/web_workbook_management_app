@@ -94,7 +94,7 @@ export const ProblemTable = ({ category }: ProblemTableType) => {
                     <Table.Td>{dateConverter(problem.last_answered)}</Table.Td>
                     <Table.Td>
                       <Button onClick={() => openDrawer(problem.id)} size="xs">
-                        回答を記録
+                        解答を記録
                       </Button>
                     </Table.Td>
                   </Table.Tr>
