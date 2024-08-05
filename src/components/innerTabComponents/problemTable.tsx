@@ -16,7 +16,7 @@ type ProblemTableType = {
 export const ProblemTable = ({ category }: ProblemTableType) => {
   const [problems, setProblems] = useState<Problem[]>([]);
   const [keyword, setKeyword] = useState<string>("");
-  const defferedKeyword = useDeferredValue(keyword);
+  const deferredKeyword = useDeferredValue(keyword);
   const [filteredProblems, setFilteredProblems] = useState<Problem[]>([]);
   const [problemId, setProblemId] = useState<number>();
   const [opened, { open, close }] = useDisclosure(false);
@@ -33,17 +33,17 @@ export const ProblemTable = ({ category }: ProblemTableType) => {
   }, [category]);
 
   useEffect(() => {
-    if (defferedKeyword) {
+    if (deferredKeyword) {
       const filteredProblems = problems.filter((problem) =>
         problem.problem_name
           .toLowerCase()
-          .includes(defferedKeyword.toLowerCase())
+          .includes(deferredKeyword.toLowerCase())
       );
       setFilteredProblems(filteredProblems);
     } else {
       setFilteredProblems(problems);
     }
-  }, [defferedKeyword, problems]);
+  }, [deferredKeyword, problems]);
 
   const openDrawer = (problemId: number) => {
     setProblemId(problemId);
