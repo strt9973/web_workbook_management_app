@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useDeferredValue, useEffect, useState } from 'react';
 
-import { Box, Drawer, ScrollArea } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { Box, Drawer, ScrollArea, TextInput } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 
-import { historiesSelect, updateHistory } from "../../sql/sql";
-import { History, ViewHistory } from "../../type";
-import { execute, select } from "../../utils/db";
-import { HistoryForm } from "../form/historyForm";
-import { HistoryCard } from "../historyCard";
+import { historiesSelect, updateHistory } from '../../sql/sql';
+import { History, ViewHistory } from '../../type';
+import { execute, select } from '../../utils/db';
+import { HistoryForm } from '../form/historyForm';
+import { HistoryCard } from '../historyCard';
 
 type ProblemListType = {
   category: string;
@@ -15,20 +15,36 @@ type ProblemListType = {
 
 export const HistoryList = ({ category }: ProblemListType) => {
   const [histories, setHistories] = useState<ViewHistory[]>([]);
+  const [keyword, setKeyword] = useState<string>("");
+  const deferredKeyword = useDeferredValue(keyword);
+  const [filteredHistories, setFilteredHistories] = useState<ViewHistory[]>([]);
 
   const [history, setHistory] = useState<History>();
   const [opened, { open, close }] = useDisclosure(false);
 
   const getHistoryList = async () => {
     const histories = await select<ViewHistory>(historiesSelect, [category]);
-
     if (!histories) return;
     setHistories(histories);
+    setFilteredHistories(histories);
   };
 
   useEffect(() => {
     getHistoryList();
-  }, []);
+  }, [category]);
+
+  useEffect(() => {
+    if (deferredKeyword) {
+      const filteredHistories = histories.filter((history) =>
+        history.problem_name
+          .toLowerCase()
+          .includes(deferredKeyword.toLowerCase())
+      );
+      setFilteredHistories(filteredHistories);
+    } else {
+      setFilteredHistories(histories);
+    }
+  }, [deferredKeyword, histories]);
 
   const openDrawer = (history: ViewHistory) => {
     setHistory({
@@ -56,16 +72,19 @@ export const HistoryList = ({ category }: ProblemListType) => {
   };
 
   return (
-    <>
-      <ScrollArea h={"calc(100vh - 120px)"} p={16}>
-        {histories.map((h) => {
-          return (
-            <Box pb={8} key={h.id}>
-              <HistoryCard history={h} openDrawer={openDrawer} />
-            </Box>
-          );
-        })}
-      </ScrollArea>
+    <ScrollArea h={"calc(100vh - 120px)"}>
+      <TextInput
+        label="問題名検索"
+        onChange={(e) => setKeyword(e.target.value)}
+      />
+      {filteredHistories.map((h) => {
+        return (
+          <Box pt={8} key={h.id}>
+            <HistoryCard history={h} openDrawer={openDrawer} />
+          </Box>
+        );
+      })}
+
       <Drawer
         position="right"
         opened={opened}
@@ -80,6 +99,6 @@ export const HistoryList = ({ category }: ProblemListType) => {
           />
         ) : null}
       </Drawer>
-    </>
+    </ScrollArea>
   );
 };

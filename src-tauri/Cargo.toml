@@ -1,27 +1,27 @@
 [package]
 name = "web-workbook-management-app"
-version = "1.0.0"
-description = "A Tauri App"
-authors = ["you"]
+version = "1.0.1"
+description = "A desktop application that can manage the progress of problem sets, similar to LeetCode, available on the web."
+authors = ["strt9973"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-beta", features = [] }
+tauri-build = { version = "2.0.0-rc.0", features = [] }
 
 [dependencies.tauri-plugin-sql]
 features = ["sqlite"]
-version = "2.0.0-beta"
+version = "2.0.0-rc.0"
 
 [dependencies]
-tauri = { version = "2.0.0-beta", features = [] }
-tauri-plugin-shell = "2.0.0-beta"
+tauri = { version = "2.0.0-rc.0", features = [] }
+tauri-plugin-shell = "2.0.0-rc.0"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tauri-plugin-store = "2.0.0-beta.5"
-tauri-plugin-fs = "2.0.0-beta"
-tauri-plugin-dialog = "2.0.0-beta"
+tauri-plugin-store = "2.0.0-rc.0"
+tauri-plugin-fs = "2.0.0-rc.0"
+tauri-plugin-dialog = "2.0.0-rc.0"
 dirs-next = "2.0.0"
-sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "sqlite"] }
+sqlx = { version = "0.8", features = ["runtime-tokio-native-tls", "sqlite"] }
 tokio = { version = "1", features = ["full"] }
